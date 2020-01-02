@@ -87,6 +87,7 @@ WORKDIR ${COWRIE_HOME}/cowrie-git
 # preserve .dist file when etc/ volume is mounted
 VOLUME [ "/cowrie/cowrie-git/var", "/cowrie/cowrie-git/etc" ]
 RUN mv ${COWRIE_HOME}/cowrie-git/cowrie.cfg.dist ${COWRIE_HOME}/cowrie-git/etc
+RUN sed -i 's/activate_venv "cowrie_env"/activate_venv "..\/cowrie-env"/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
 
 ENTRYPOINT [ "cowrie" ]
 CMD [ "start", "-n" ]
