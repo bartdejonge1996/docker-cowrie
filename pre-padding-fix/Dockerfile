@@ -35,6 +35,7 @@ RUN export DEBIAN_FRONTEND=noninteractive; \
       python3-virtualenv \
       libsnappy-dev \
       libmpc-dev \
+      python3-distutils \
       default-libmysqlclient-dev && \
     rm -rf /var/lib/apt/lists/*
 
@@ -51,6 +52,7 @@ RUN git clone https://github.com/cowrie/cowrie ${COWRIE_HOME}/cowrie-git && \
       pip install --no-cache-dir --upgrade pip && \
       pip install --no-cache-dir --upgrade cffi && \
       pip install --no-cache-dir --upgrade setuptools && \
+      pip install --no-cache-dir --upgrade bcrypt && \
       pip install --no-cache-dir --upgrade -r ${COWRIE_HOME}/cowrie-git/requirements.txt
 
 FROM debian:buster-slim AS runtime
