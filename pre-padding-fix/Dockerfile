@@ -85,7 +85,6 @@ USER ${COWRIE_USER}
 WORKDIR ${COWRIE_HOME}/cowrie-git
 
 # preserve .dist file when etc/ volume is mounted
-RUN cp ${COWRIE_HOME}/cowrie-git/etc/cowrie.cfg.dist ${COWRIE_HOME}/cowrie-git
 VOLUME [ "/cowrie/cowrie-git/var", "/cowrie/cowrie-git/etc" ]
 RUN mv ${COWRIE_HOME}/cowrie-git/cowrie.cfg.dist ${COWRIE_HOME}/cowrie-git/etc
 
