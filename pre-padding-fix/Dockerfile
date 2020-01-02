@@ -23,12 +23,12 @@ RUN export DEBIAN_FRONTEND=noninteractive; \
     apt-get install -y \
         -o APT::Install-Suggests=false \
         -o APT::Install-Recommends=false \
-      python3-pip \
+      python-pip \
       libssl-dev \
       libffi-dev \
-      python3-dev \
-      python3-venv \
-      python3 \
+      python-dev \
+      python-venv \
+      python \
       gcc \
       git \
       build-essential \
@@ -88,7 +88,7 @@ WORKDIR ${COWRIE_HOME}/cowrie-git
 
 # preserve .dist file when etc/ volume is mounted
 VOLUME [ "/cowrie/cowrie-git/var", "/cowrie/cowrie-git/etc" ]
-RUN mv ${COWRIE_HOME}/cowrie-git/cowrie.cfg.dist ${COWRIE_HOME}/cowrie-git/etc
+# RUN mv ${COWRIE_HOME}/cowrie-git/cowrie.cfg.dist ${COWRIE_HOME}/cowrie-git/etc
 RUN sed -i 's/activate_venv "cowrie-env"/activate_venv "..\/cowrie-env"/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
 
 ENTRYPOINT [ "cowrie" ]
