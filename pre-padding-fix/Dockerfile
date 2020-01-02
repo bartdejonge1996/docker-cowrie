@@ -51,8 +51,7 @@ RUN git clone https://github.com/cowrie/cowrie ${COWRIE_HOME}/cowrie-git && \
       pip install --no-cache-dir --upgrade pip && \
       pip install --no-cache-dir --upgrade cffi && \
       pip install --no-cache-dir --upgrade setuptools && \
-      pip install --no-cache-dir --upgrade -r ${COWRIE_HOME}/cowrie-git/requirements.txt && \
-      pip install --no-cache-dir --upgrade -r ${COWRIE_HOME}/cowrie-git/requirements-output.txt
+      pip install --no-cache-dir --upgrade -r ${COWRIE_HOME}/cowrie-git/requirements.txt
 
 FROM debian:buster-slim AS runtime
 LABEL maintainer="Michel Oosterhof <michel@oosterhof.net>"
