@@ -45,7 +45,7 @@ USER ${COWRIE_USER}
 
 RUN git clone https://github.com/cowrie/cowrie ${COWRIE_HOME}/cowrie-git && \
     cd ${COWRIE_HOME}/cowrie-git && \
-    git checkout a1675e3cea22da2ee63b881d0dbf0b118b068443 && \
+    git checkout 7c0ab334909ef785e658c8063a217f3b874bf667 && \
     cd ${COWRIE_HOME} && \
       python3 -m venv cowrie-env && \
       . cowrie-env/bin/activate && \
@@ -53,7 +53,8 @@ RUN git clone https://github.com/cowrie/cowrie ${COWRIE_HOME}/cowrie-git && \
       pip install --no-cache-dir --upgrade cffi && \
       pip install --no-cache-dir --upgrade setuptools && \
       pip install --no-cache-dir --upgrade bcrypt && \
-      pip install --no-cache-dir --upgrade -r ${COWRIE_HOME}/cowrie-git/requirements.txt
+      pip install --no-cache-dir --upgrade -r ${COWRIE_HOME}/cowrie-git/requirements.txt && \
+      pip install --no-cache-dir --upgrade -r ${COWRIE_HOME}/cowrie-git/requirements-output.txt
 
 FROM debian:buster-slim AS runtime
 LABEL maintainer="Michel Oosterhof <michel@oosterhof.net>"
@@ -88,9 +89,9 @@ WORKDIR ${COWRIE_HOME}/cowrie-git
 
 # preserve .dist file when etc/ volume is mounted
 VOLUME [ "/cowrie/cowrie-git/var", "/cowrie/cowrie-git/etc" ]
-# RUN mv ${COWRIE_HOME}/cowrie-git/cowrie.cfg.dist ${COWRIE_HOME}/cowrie-git/etc
-RUN sed -i 's/activate_venv "cowrie-env"/activate_venv "..\/cowrie-env"/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
-RUN sed -i 's/file(/open(/' ${COWRIE_HOME}/cowrie-git/cowrie/core/realm.py
+RUN mv ${COWRIE_HOME}/cowrie-git/cowrie.cfg.dist ${COWRIE_HOME}/cowrie-git/cowrie.cfg
+# RUN sed -i 's/activate_venv "cowrie-env"/activate_venv "..\/cowrie-env"/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
+# RUN sed -i 's/file(/open(/' ${COWRIE_HOME}/cowrie-git/cowrie/core/realm.py
 
 ENTRYPOINT [ "cowrie" ]
 CMD [ "start", "-n" ]
