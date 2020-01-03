@@ -53,6 +53,7 @@ RUN git clone https://github.com/cowrie/cowrie ${COWRIE_HOME}/cowrie-git && \
       pip install --no-cache-dir --upgrade cffi && \
       pip install --no-cache-dir --upgrade setuptools && \
       pip install --no-cache-dir --upgrade bcrypt && \
+      pip install --no-cache-dir --upgrade mysqlclient && \
       pip install --no-cache-dir --upgrade -r ${COWRIE_HOME}/cowrie-git/requirements.txt && \
       pip install --no-cache-dir --upgrade -r ${COWRIE_HOME}/cowrie-git/requirements-output.txt
 
