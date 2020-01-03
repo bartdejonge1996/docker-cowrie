@@ -36,6 +36,7 @@ RUN export DEBIAN_FRONTEND=noninteractive; \
       libsnappy-dev \
       libmpc-dev \
       python3-distutils \
+      nano \
       default-libmysqlclient-dev && \
     rm -rf /var/lib/apt/lists/*
 
