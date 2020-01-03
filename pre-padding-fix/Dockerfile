@@ -54,6 +54,7 @@ RUN git clone https://github.com/cowrie/cowrie ${COWRIE_HOME}/cowrie-git && \
       pip install --no-cache-dir --upgrade setuptools && \
       pip install --no-cache-dir --upgrade bcrypt && \
       pip install --no-cache-dir --upgrade mysqlclient && \
+      sed -i 's/twisted/twisted>=15.2.1,<=16.6.0/g' ${COWRIE_HOME}/cowrie-git/requirements.txt && \
       pip install --no-cache-dir --upgrade -r ${COWRIE_HOME}/cowrie-git/requirements.txt && \
       sed -i '/MySQL-python/d' ${COWRIE_HOME}/cowrie-git/requirements-output.txt && \
       pip install --no-cache-dir --upgrade -r ${COWRIE_HOME}/cowrie-git/requirements-output.txt
@@ -92,7 +93,7 @@ WORKDIR ${COWRIE_HOME}/cowrie-git
 # preserve .dist file when etc/ volume is mounted
 VOLUME [ "/cowrie/cowrie-git/var", "/cowrie/cowrie-git/etc" ]
 RUN mv ${COWRIE_HOME}/cowrie-git/cowrie.cfg.dist ${COWRIE_HOME}/cowrie-git/cowrie.cfg
-# RUN sed -i 's/activate_venv "cowrie-env"/activate_venv "..\/cowrie-env"/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
+RUN sed -i 's/activate_venv "cowrie-env"/activate_venv "..\/cowrie-env"/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
 # RUN sed -i 's/file(/open(/' ${COWRIE_HOME}/cowrie-git/cowrie/core/realm.py
 
 ENTRYPOINT [ "cowrie" ]
