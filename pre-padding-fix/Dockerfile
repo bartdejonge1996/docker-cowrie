@@ -43,6 +43,8 @@ RUN export DEBIAN_FRONTEND=noninteractive; \
 
 USER ${COWRIE_USER}
 
+RUN sed -i '/MySQL-python/d' ${COWRIE_HOME}/cowrie-git/requirements-output.txt
+
 RUN git clone https://github.com/cowrie/cowrie ${COWRIE_HOME}/cowrie-git && \
     cd ${COWRIE_HOME}/cowrie-git && \
     git checkout 7c0ab334909ef785e658c8063a217f3b874bf667 && \
