@@ -50,21 +50,21 @@ ENV STDOUT=yes
 
 USER ${COWRIE_USER}
 
-RUN git clone https://github.com/cowrie/cowrie ${COWRIE_HOME}/cowrie-git && \
-    cd ${COWRIE_HOME}/cowrie-git && \
-    git checkout 7c0ab334909ef785e658c8063a217f3b874bf667 && \
-    cd ${COWRIE_HOME} && \
-      python -m virtualenv cowrie-env && \
-      . cowrie-env/bin/activate && \
-      pip install --no-cache-dir --upgrade pip && \
-      pip install --no-cache-dir --upgrade cffi && \
-      pip install --no-cache-dir --upgrade setuptools && \
-      pip install --no-cache-dir --upgrade bcrypt && \
-      pip install --no-cache-dir --upgrade mysqlclient && \
-      sed -i 's/twisted>=15.2.1/twisted==16.5.0/g' ${COWRIE_HOME}/cowrie-git/requirements.txt && \
-      pip install --no-cache-dir --upgrade -r ${COWRIE_HOME}/cowrie-git/requirements.txt && \
-      sed -i '/MySQL-python/d' ${COWRIE_HOME}/cowrie-git/requirements-output.txt && \
-      pip install --no-cache-dir --upgrade -r ${COWRIE_HOME}/cowrie-git/requirements-output.txt
+RUN git clone https://github.com/cowrie/cowrie ${COWRIE_HOME}/cowrie-git
+RUN cd ${COWRIE_HOME}/cowrie-git
+RUN git checkout 7c0ab334909ef785e658c8063a217f3b874bf667
+RUN cd ${COWRIE_HOME}
+RUN python -m virtualenv cowrie-env
+RUN . cowrie-env/bin/activate
+RUN pip install --no-cache-dir --upgrade pip
+RUN pip install --no-cache-dir --upgrade cffi
+RUN pip install --no-cache-dir --upgrade setuptools
+RUN pip install --no-cache-dir --upgrade bcrypt
+RUN pip install --no-cache-dir --upgrade mysqlclient
+RUN sed -i 's/twisted>=15.2.1/twisted==16.5.0/g' ${COWRIE_HOME}/cowrie-git/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r ${COWRIE_HOME}/cowrie-git/requirements.txt
+RUN sed -i '/MySQL-python/d' ${COWRIE_HOME}/cowrie-git/requirements-output.txt
+RUN pip install --no-cache-dir --upgrade -r ${COWRIE_HOME}/cowrie-git/requirements-output.txt
 
 WORKDIR ${COWRIE_HOME}/cowrie-git
 
