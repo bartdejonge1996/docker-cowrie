@@ -26,13 +26,11 @@ RUN export DEBIAN_FRONTEND=noninteractive; \
       python-pip \
       libssl-dev \
       libffi-dev \
-      python3-dev \
-      python3-venv \
-      python3 \
+      python-dev \
+      python \
       gcc \
       git \
       build-essential \
-      python3-virtualenv \
       libsnappy-dev \
       libmpc-dev \
       python3-distutils \
@@ -41,8 +39,7 @@ RUN export DEBIAN_FRONTEND=noninteractive; \
       libffi6 \
       procps \
       default-libmysqlclient-dev && \
-    rm -rf /var/lib/apt/lists/* && \
-    ln -s /usr/bin/python3 /usr/local/bin/python
+    rm -rf /var/lib/apt/lists/*
 
 RUN chown -R ${COWRIE_USER}:${COWRIE_GROUP} ${COWRIE_HOME}
 
