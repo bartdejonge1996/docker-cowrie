@@ -63,7 +63,6 @@ RUN python -m pip install --no-cache-dir --user --upgrade mysqlclient
 RUN sed -i 's/twisted>=15.2.1/twisted==16.5.0/g' ${COWRIE_HOME}/cowrie-git/requirements.txt
 RUN python -m pip install --no-cache-dir --user --upgrade -r ${COWRIE_HOME}/cowrie-git/requirements.txt
 RUN sed -i '/MySQL-python/d' ${COWRIE_HOME}/cowrie-git/requirements-output.txt
-RUN python -m pip install --no-cache-dir --user --upgrade -r ${COWRIE_HOME}/cowrie-git/requirements-output.txt
 
 WORKDIR ${COWRIE_HOME}/cowrie-git
 
