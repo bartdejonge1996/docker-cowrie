@@ -48,7 +48,10 @@ ENV STDOUT=yes
 
 # Build a cowrie environment from github master HEAD.
 RUN python -m pip install --no-cache-dir --upgrade setuptools
-RUN python -m pip install --no-cache-dir --upgrade 'twisted>=15.2.1'
+RUN python -m pip install --no-cache-dir --upgrade 'twisted>=19.10.0'
+
+# Should get actual location here
+RUN sed -i 's/return Key(self._keyObject.public_key())/return Key(self._keyObject.publickey())/g' /usr/local/lib/python2.7/dist-packages/twisted/conch/ssh/keys.py
 
 USER ${COWRIE_USER}
 
@@ -75,10 +78,6 @@ RUN sed -i 's/activate_venv "cowrie-env"/activate_venv "..\/cowrie-env"/g' ${COW
 RUN sed -i 's/VIRTUALENV_ENABLED=yes/VIRTUALENV_ENABLED=no/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
 RUN sed -i 's/DAEMONIZE=""/DAEMONIZE="-n"/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
 # RUN sed -i 's/file(/open(/' ${COWRIE_HOME}/cowrie-git/cowrie/core/realm.py
-
-# Should get actual location here
-RUN sed -i 's/return Key(self._keyObject.public_key())/return Key(self._keyObject.publickey())/g' /usr/local/lib/python2.7/dist-packages/twisted/conch/ssh/keys.py
-
 
 ENTRYPOINT [ "cowrie" ]
 CMD [ "start" ]
