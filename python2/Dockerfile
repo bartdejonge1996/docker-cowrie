@@ -71,6 +71,8 @@ WORKDIR ${COWRIE_HOME}/cowrie-git
 # preserve .dist file when etc/ volume is mounted
 VOLUME [ "/cowrie/cowrie-git/var", "/cowrie/cowrie-git/etc" ]
 RUN mv ${COWRIE_HOME}/cowrie-git/cowrie.cfg.dist ${COWRIE_HOME}/cowrie-git/cowrie.cfg
+RUN sed -i 's/#listen_port = 2222/listen_port=22/g' ${COWRIE_HOME}/cowrie-git/cowrie.cfg
+
 RUN sed -i 's/activate_venv "cowrie-env"/activate_venv "..\/cowrie-env"/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
 RUN sed -i 's/VIRTUALENV_ENABLED=yes/VIRTUALENV_ENABLED=no/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
 RUN sed -i 's/DAEMONIZE=""/DAEMONIZE="-n"/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
@@ -84,4 +86,4 @@ RUN sed -i 's/dsaKey = DSA.generate(KEY_LENGTH, randbytes.secureRandom)/dsaKey =
 
 ENTRYPOINT [ "cowrie" ]
 CMD [ "start" ]
-EXPOSE 2222 2223
+EXPOSE 22
