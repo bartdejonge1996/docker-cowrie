@@ -2,7 +2,7 @@
 # `builder` contains all necessary code to build
 # `runtime` is stripped down.
 
-FROM debian:buster-slim as builder
+FROM debian:buster-slim AS builder
 LABEL maintainer="Michel Oosterhof <michel@oosterhof.net>"
 
 ENV COWRIE_GROUP=cowrie \
