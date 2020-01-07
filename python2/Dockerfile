@@ -52,6 +52,7 @@ USER ${COWRIE_USER}
 
 RUN git clone https://github.com/cowrie/cowrie ${COWRIE_HOME}/cowrie-git
 RUN cd ${COWRIE_HOME}/cowrie-git && git checkout 7c0ab334909ef785e658c8063a217f3b874bf667
+RUN pip install --no-cache-dir --upgrade virtualenv
 RUN cd ${COWRIE_HOME} && python -m virtualenv cowrie-env
 RUN cd ${COWRIE_HOME} && . cowrie-env/bin/activate
 RUN pip install --no-cache-dir --upgrade pip
