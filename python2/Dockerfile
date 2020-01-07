@@ -71,7 +71,7 @@ WORKDIR ${COWRIE_HOME}/cowrie-git
 # preserve .dist file when etc/ volume is mounted
 VOLUME [ "/cowrie/cowrie-git/var", "/cowrie/cowrie-git/etc" ]
 RUN mv ${COWRIE_HOME}/cowrie-git/cowrie.cfg.dist ${COWRIE_HOME}/cowrie-git/cowrie.cfg
-RUN sed -i 's/#listen_port = 2222/listen_port=22/g' ${COWRIE_HOME}/cowrie-git/cowrie.cfg
+RUN sed -i 's/listen_endpoints = tcp:2222:interface=0.0.0.0/listen_endpoints = tcp:22:interface=0.0.0.0/g' ${COWRIE_HOME}/cowrie-git/cowrie.cfg
 
 RUN sed -i 's/activate_venv "cowrie-env"/activate_venv "..\/cowrie-env"/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
 RUN sed -i 's/VIRTUALENV_ENABLED=yes/VIRTUALENV_ENABLED=no/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
