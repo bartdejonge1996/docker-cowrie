@@ -76,6 +76,10 @@ RUN sed -i 's/VIRTUALENV_ENABLED=yes/VIRTUALENV_ENABLED=no/g' ${COWRIE_HOME}/cow
 RUN sed -i 's/DAEMONIZE=""/DAEMONIZE="-n"/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
 # RUN sed -i 's/file(/open(/' ${COWRIE_HOME}/cowrie-git/cowrie/core/realm.py
 
+# Should get actual location here
+RUN sed -i 's/return Key(self._keyObject.public_key())/return Key(self._keyObject.publickey())/g' /usr/local/lib/python2.7/dist-packages/twisted/conch/ssh/keys.py
+
+
 ENTRYPOINT [ "cowrie" ]
 CMD [ "start" ]
 EXPOSE 2222 2223
