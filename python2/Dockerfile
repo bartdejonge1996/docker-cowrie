@@ -56,7 +56,7 @@ RUN pip install --no-cache-dir --upgrade virtualenv
 RUN cd ${COWRIE_HOME} && python -m virtualenv cowrie-env
 RUN cd ${COWRIE_HOME} && . cowrie-env/bin/activate
 RUN pip install --no-cache-dir --upgrade pip
-RUN python -m pip install --no-cache-dir --upgrade setuptools
+RUN python -m pip install --no-cache-dir --user cowrie --upgrade setuptools
 RUN python -m pip install --no-cache-dir --upgrade cffi
 RUN python -m pip install --no-cache-dir --upgrade bcrypt
 RUN python -m pip install --no-cache-dir --upgrade mysqlclient
