@@ -54,7 +54,7 @@ RUN git clone https://github.com/cowrie/cowrie ${COWRIE_HOME}/cowrie-git && \
     cd ${COWRIE_HOME}/cowrie-git && \
     git checkout 7c0ab334909ef785e658c8063a217f3b874bf667 && \
     cd ${COWRIE_HOME} && \
-      python3 -m venv cowrie-env && \
+      python -m virtualenv cowrie-env && \
       . cowrie-env/bin/activate && \
       pip install --no-cache-dir --upgrade pip && \
       pip install --no-cache-dir --upgrade cffi && \
