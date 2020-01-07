@@ -51,11 +51,9 @@ ENV STDOUT=yes
 USER ${COWRIE_USER}
 
 RUN git clone https://github.com/cowrie/cowrie ${COWRIE_HOME}/cowrie-git
-RUN cd ${COWRIE_HOME}/cowrie-git
-RUN git checkout 7c0ab334909ef785e658c8063a217f3b874bf667
-RUN cd ${COWRIE_HOME}
-RUN python -m virtualenv cowrie-env
-RUN . cowrie-env/bin/activate
+RUN cd ${COWRIE_HOME}/cowrie-git && git checkout 7c0ab334909ef785e658c8063a217f3b874bf667
+RUN cd ${COWRIE_HOME} && python -m virtualenv cowrie-env
+RUN cd ${COWRIE_HOME} && . cowrie-env/bin/activate
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir --upgrade cffi
 RUN pip install --no-cache-dir --upgrade setuptools
