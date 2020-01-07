@@ -73,6 +73,7 @@ VOLUME [ "/cowrie/cowrie-git/var", "/cowrie/cowrie-git/etc" ]
 RUN mv ${COWRIE_HOME}/cowrie-git/cowrie.cfg.dist ${COWRIE_HOME}/cowrie-git/cowrie.cfg
 RUN sed -i 's/activate_venv "cowrie-env"/activate_venv "..\/cowrie-env"/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
 RUN sed -i 's/VIRTUALENV_ENABLED=yes/VIRTUALENV_ENABLED=no/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
+run sed -i 's/DAEMONIZE=""/DAEMONIZE="-n"/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
 # RUN sed -i 's/file(/open(/' ${COWRIE_HOME}/cowrie-git/cowrie/core/realm.py
 
 ENTRYPOINT [ "cowrie" ]
