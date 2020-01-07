@@ -76,5 +76,5 @@ RUN sed -i 's/VIRTUALENV_ENABLED=yes/VIRTUALENV_ENABLED=no/g' ${COWRIE_HOME}/cow
 # RUN sed -i 's/file(/open(/' ${COWRIE_HOME}/cowrie-git/cowrie/core/realm.py
 
 ENTRYPOINT [ "cowrie" ]
-CMD [ "start", "-n" ]
+CMD [ "start" ]
 EXPOSE 2222 2223
