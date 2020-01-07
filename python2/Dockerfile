@@ -50,9 +50,6 @@ ENV STDOUT=yes
 RUN python -m pip install --no-cache-dir --upgrade setuptools
 RUN python -m pip install --no-cache-dir --upgrade 'twisted>=19.10.0'
 
-# Should get actual location here
-RUN sed -i 's/return Key(self._keyObject.public_key())/return Key(self._keyObject.publickey())/g' /usr/local/lib/python2.7/dist-packages/twisted/conch/ssh/keys.py
-
 USER ${COWRIE_USER}
 
 RUN git clone https://github.com/cowrie/cowrie ${COWRIE_HOME}/cowrie-git
@@ -78,6 +75,9 @@ RUN sed -i 's/activate_venv "cowrie-env"/activate_venv "..\/cowrie-env"/g' ${COW
 RUN sed -i 's/VIRTUALENV_ENABLED=yes/VIRTUALENV_ENABLED=no/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
 RUN sed -i 's/DAEMONIZE=""/DAEMONIZE="-n"/g' ${COWRIE_HOME}/cowrie-git/bin/cowrie
 # RUN sed -i 's/file(/open(/' ${COWRIE_HOME}/cowrie-git/cowrie/core/realm.py
+RUN sed -i 's/from Crypto.PublicKey import RSA/from cryptography.hazmat.backends import default_backend/g' ${COWRIE_HOME}/cowrie-git/cowrie/core/keys.py
+RUN sed -i 's/from twisted.python import randbytes/from cryptography.hazmat.primitives.asymmetric import rsa/g' ${COWRIE_HOME}/cowrie-git/cowrie/core/keys.py
+RUN sed -i 's/rsaKey = RSA.generate(KEY_LENGTH, randbytes.secureRandom)/rsaKey = rsa.generate_private_key(public_exponent=65537, key_size=KEY_LENGTH, backend=default_backend())/g' ${COWRIE_HOME}/cowrie-git/cowrie/core/keys.py
 
 ENTRYPOINT [ "cowrie" ]
 CMD [ "start" ]
