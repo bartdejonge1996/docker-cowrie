@@ -78,6 +78,9 @@ RUN sed -i 's/DAEMONIZE=""/DAEMONIZE="-n"/g' ${COWRIE_HOME}/cowrie-git/bin/cowri
 RUN sed -i 's/from Crypto.PublicKey import RSA/from cryptography.hazmat.backends import default_backend/g' ${COWRIE_HOME}/cowrie-git/cowrie/core/keys.py
 RUN sed -i 's/from twisted.python import randbytes/from cryptography.hazmat.primitives.asymmetric import rsa/g' ${COWRIE_HOME}/cowrie-git/cowrie/core/keys.py
 RUN sed -i 's/rsaKey = RSA.generate(KEY_LENGTH, randbytes.secureRandom)/rsaKey = rsa.generate_private_key(public_exponent=65537, key_size=KEY_LENGTH, backend=default_backend())/g' ${COWRIE_HOME}/cowrie-git/cowrie/core/keys.py
+RUN sed -i '/from Crypto.PublicKey import DSA/a\        from cryptography.hazmat.backends import default_backend' cowrie/core/keys.py
+RUN sed -i 's/from Crypto.PublicKey import DSA/from cryptography.hazmat.primitives.asymmetric import dsa/g' cowrie/core/keys.py
+RUN sed -i 's/dsaKey = DSA.generate(KEY_LENGTH, randbytes.secureRandom)/dsaKey = dsa.generate_private_key(key_size=KEY_LENGTH, backend=default_backend())/g' cowrie/core/keys.py
 
 ENTRYPOINT [ "cowrie" ]
 CMD [ "start" ]
