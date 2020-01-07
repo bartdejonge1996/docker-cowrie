@@ -47,6 +47,7 @@ ENV PATH=${COWRIE_HOME}/cowrie-git/bin:${PATH}
 ENV STDOUT=yes
 
 # Build a cowrie environment from github master HEAD.
+RUN python -m pip install --no-cache-dir --upgrade setuptools
 RUN python -m pip install --no-cache-dir --upgrade 'twisted==16.5.0'
 
 USER ${COWRIE_USER}
